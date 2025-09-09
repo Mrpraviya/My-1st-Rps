@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><title>Task Tracker</title>
+    <style>body{font-family:Arial;margin:2rem auto;max-width:800px}</style>
+</head>
+<body>
+<h1>Task Tracker</h1>
+<form th:action="@{/add}" method="post" th:object="${task}">
+    <input type="text" th:field="*{title}" placeholder="Task title (max 50)" />
+    <button type="submit">Add</button>
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:#b30000"></div>
+</form>
+<table>
+    <thead><tr><th>Id</th><th>Title</th><th>Done?</th></tr></thead>
+    <tbody>
+    <tr th:each="t : ${tasks}">
+        <td th:text="${t.id}">1</td>
+        <!-- th:text escapes HTML (prevents XSS) -->
+        <td th:text="${t.title}">Sample</td>
+        <td th:text="${t.completed}">false</td>
+    </tr>
+    </tbody>
+</table>
+<p>API: GET /api/tasks, POST /api/tasks, PUT /api/tasks/{id}/toggle</p>
+</body>
+</html>

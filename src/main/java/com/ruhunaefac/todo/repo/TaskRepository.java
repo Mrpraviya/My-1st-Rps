@@ -1,0 +1,5 @@
+package com.ruhunaefac.todo.repo;
+
+import com.ruhunaefac.todo.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface TaskRepository extends JpaRepository<Task, Long> { }
